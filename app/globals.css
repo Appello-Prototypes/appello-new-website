@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Enhanced styling for Problem/Solution/Impact sections in blog posts */
+.prose .problem-box {
+  @apply bg-red-50 border-l-4 border-red-400 pl-6 pr-4 py-4 rounded-r-lg my-6 shadow-sm;
+}
+
+.prose .problem-label {
+  @apply block text-red-700 font-bold text-sm uppercase tracking-wide mb-2;
+}
+
+.prose .problem-box p {
+  @apply text-gray-800 mb-0;
+}
+
+.prose .solution-box {
+  @apply bg-blue-50 border-l-4 border-blue-400 pl-6 pr-4 py-4 rounded-r-lg my-6 shadow-sm;
+}
+
+.prose .solution-label {
+  @apply block text-blue-700 font-bold text-sm uppercase tracking-wide mb-2;
+}
+
+.prose .solution-box p {
+  @apply text-gray-800 mb-0;
+}
+
+.prose .impact-box {
+  @apply bg-green-50 border-l-4 border-green-500 pl-6 pr-4 py-4 rounded-r-lg my-6 shadow-sm;
+}
+
+.prose .impact-label {
+  @apply block text-green-700 font-bold text-sm uppercase tracking-wide mb-2;
+}
+
+.prose .impact-box p {
+  @apply text-gray-800 mb-0 font-medium;
+}
+
+/* Video wrapper styling */
+.prose .video-wrapper {
+  @apply my-8 rounded-lg overflow-hidden shadow-lg;
+}
+
+.prose .video-wrapper iframe {
+  @apply w-full aspect-video;
+}
+
+/* Enhanced image styling */
+.prose img {
+  @apply rounded-lg shadow-md my-8 w-full h-auto;
+}
+
+/* Ensure proper spacing for nested lists */
+.prose ul ul,
+.prose ol ol,
+.prose ul ol,
+.prose ol ul {
+  @apply mt-2 mb-2;
+}
+
+/* Better table styling */
+.prose table {
+  @apply border-collapse w-full my-8;
+}
+
+.prose th {
+  @apply border border-gray-300 bg-gray-50 px-4 py-2 text-left font-semibold text-gray-900;
+}
+
+.prose td {
+  @apply border border-gray-300 px-4 py-2 text-gray-700;
+}
+
+.prose tr:nth-child(even) {
+  @apply bg-gray-50;
+}
+
+/* Callout styling - handled inline in MDXContent component */
+
+/* Ensure hash tag anchor links in headings are properly hidden */
+.prose .heading-anchor-link {
+  position: absolute;
+  left: -1.5rem;
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+  color: rgb(59 130 246);
+  text-decoration: none;
+  font-size: 1.125rem;
+  font-weight: 400;
+  transition: opacity 0.2s ease-in-out;
+  line-height: inherit;
+}
+
+.prose .heading-with-anchor:hover .heading-anchor-link {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.prose .heading-with-anchor {
+  position: relative;
+  padding-left: 0;
+  margin-left: 0;
+}
+
