@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import { motion, HTMLMotionProps } from "framer-motion";
+import { motion } from "framer-motion";
 import { SVGElement, convertAttributesToProps } from "./svg-parser";
 
 export interface InteractiveSVGElementProps {
@@ -11,7 +11,7 @@ export interface InteractiveSVGElementProps {
   isInteractive?: boolean;
   onClick?: (element: SVGElement) => void;
   onHover?: (element: SVGElement) => void;
-  animationProps?: HTMLMotionProps<"g">;
+  animationProps?: Record<string, any>;
   className?: string;
 }
 
@@ -30,7 +30,7 @@ export function renderSVGElement(
     className = "",
   } = props;
 
-  const elementProps = convertAttributesToProps(element.attributes);
+  const elementProps: Record<string, any> = convertAttributesToProps(element.attributes);
   
   // Add interactive props
   if (isInteractive) {
@@ -124,7 +124,7 @@ export function renderSVGElement(
     case "image":
       // Convert xlink:href to xlinkHref for React
       const imageHref = element.attributes.href || element.attributes["xlink:href"];
-      const imageProps = { ...motionProps };
+      const imageProps: Record<string, any> = { ...motionProps };
       if (element.attributes["xlink:href"] && !element.attributes.href) {
         imageProps.xlinkHref = element.attributes["xlink:href"];
       } else if (imageHref) {
@@ -189,9 +189,9 @@ export function renderSVGElement(
 export function createInteractiveElementWrapper(
   element: SVGElement,
   config: {
-    defaultAnimation?: HTMLMotionProps<"g">;
-    hoverAnimation?: HTMLMotionProps<"g">;
-    clickAnimation?: HTMLMotionProps<"g">;
+    defaultAnimation?: Record<string, any>;
+    hoverAnimation?: Record<string, any>;
+    clickAnimation?: Record<string, any>;
     onClick?: (element: SVGElement) => void;
     onHover?: (element: SVGElement) => void;
   } = {}
