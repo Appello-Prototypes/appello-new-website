@@ -82,7 +82,7 @@ export default function CTASection() {
             Ready to Leave the Multiple Disconnected Systems Behind?
           </h2>
           <p className="text-xl text-gray-600">
-            Join hundreds of contractors who've streamlined their operations with Appello
+            Join Contractors Across North America Using Appello
           </p>
         </div>
         
@@ -187,19 +187,12 @@ export default function CTASection() {
                 
                 {/* Trust Indicators */}
                 <div className="pt-6 border-t border-gray-200">
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    <div className="flex text-amber-400">
-                      {[...Array(5)].map((_, i) => (
-                        <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                        </svg>
-                      ))}
-                    </div>
-                    <span className="text-lg font-bold text-gray-900">4.80/5</span>
+                  <div className="flex items-center justify-center gap-3 text-sm text-gray-600">
+                    <svg className="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span className="font-medium">Built with customer feedback from day one</span>
                   </div>
-                  <p className="text-sm text-gray-600 text-center">
-                    From 300+ Customer Reviews
-                  </p>
                 </div>
               </div>
               
@@ -210,11 +203,11 @@ export default function CTASection() {
                 </h4>
                 <div className="space-y-4">
                   {[
-                    "Free 7-day trial",
-                    "No credit card required",
-                    "Cancel anytime",
-                    "Go live in as quick as 2 weeks",
-                    "Personal hands-on onboarding",
+                    "Personalized demo tailored to your pain points",
+                    "Discovery questions to understand your needs",
+                    "Module overview and case study materials",
+                    "See how Appello addresses your specific challenges",
+                    "Transparent modular pricing discussion",
                   ].map((benefit, index) => (
                     <div key={index} className="flex items-start gap-3">
                       <div className="flex-shrink-0 mt-0.5">
@@ -234,27 +227,12 @@ export default function CTASection() {
                     <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span>Trusted by 25+ contractors nationwide</span>
+                    <span>Trusted by Trade Contractors Across North America</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        
-        {/* Bottom CTA */}
-        <div className="text-center space-y-4">
-          <p className="text-gray-600">
-            Prefer to schedule directly? Book your demo in one click
-          </p>
-          <Button 
-            href="https://meetings.hubspot.com/shelson/appello-demo" 
-            variant="primary"
-            size="lg"
-            className="shadow-lg hover:shadow-xl transition-all"
-          >
-            Book a Free Demo!
-          </Button>
         </div>
       </div>
     </Section>

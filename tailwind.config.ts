@@ -15,6 +15,20 @@ const config: Config = {
           light: "#3b82f6",
         },
       },
+      animation: {
+        "scroll-right": "scroll-right 30s linear infinite",
+        "scroll-left": "scroll-left 30s linear infinite",
+      },
+      keyframes: {
+        "scroll-right": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "scroll-left": {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+      },
     },
   },
   plugins: [require("@tailwindcss/typography")],

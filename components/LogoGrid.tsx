@@ -146,7 +146,7 @@ export default function LogoGrid() {
             }}
           >
             <div className="h-px w-12 bg-gray-300"></div>
-            <span>24+ Trusted Partners</span>
+            <span>Proud to Partner and Support Trade Contractors Across North America</span>
             <div className="h-px w-12 bg-gray-300"></div>
           </div>
         </div>

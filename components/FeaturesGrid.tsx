@@ -125,7 +125,7 @@ export default function FeaturesGrid() {
       <div className="space-y-16">
         <div className="text-center max-w-3xl mx-auto space-y-6">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-            Everything You Need, All in One Platform
+            Modules & Platform Features
           </h2>
           <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
             Stop juggling separate subscriptions. Appello's integrated CORE platform connects all 12 modules—everything ICI contractors actually need, working together seamlessly.

@@ -1,8 +1,11 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import LogoGrid from "@/components/LogoGrid";
+import Partnerships from "@/components/Partnerships";
+import QuickBooksIntegration from "@/components/QuickBooksIntegration";
 import VideoSection from "@/components/VideoSection";
 import ValueProp from "@/components/ValueProp";
+import BusinessFunctions from "@/components/BusinessFunctions";
 import CoreModulesWheel from "@/components/CoreModulesWheel";
 import FeaturesGrid from "@/components/FeaturesGrid";
 import AppelloIntelligence from "@/components/AppelloIntelligence";
@@ -25,15 +28,18 @@ export default function Home() {
       <LogoGrid />
       <VideoSection />
       <ValueProp />
+      <BusinessFunctions />
       <CoreModulesWheel />
       <FeaturesGrid />
       <AppelloIntelligence />
+      <QuickBooksIntegration />
       <MidPageCTA />
       <SeeYourBusiness />
       <MetricsSection caseStudies={caseStudies} />
       <Testimonials />
       <Integrations />
       <CTASection />
+      <Partnerships />
       <Footer />
     </main>
   );
