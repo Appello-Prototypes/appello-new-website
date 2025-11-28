@@ -148,7 +148,7 @@ export default function SeeYourBusiness() {
   }, [mounted]);
 
   return (
-    <Section background="white">
+    <Section background="gradient" pattern decorative>
       <div className="space-y-12">
         {/* Header Section with Rotating Description */}
         <div className="text-center max-w-3xl mx-auto">

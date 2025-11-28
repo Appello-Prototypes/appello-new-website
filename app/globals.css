@@ -349,3 +349,42 @@ html {
   animation: shine 2s ease-in-out infinite;
 }
 
+/* Connecting visual elements */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Section transition gradients */
+.section-gradient-top {
+  background: linear-gradient(to bottom, rgba(59, 130, 246, 0.05), transparent);
+}
+
+.section-gradient-bottom {
+  background: linear-gradient(to top, rgba(59, 130, 246, 0.05), transparent);
+}
+
+/* Connecting line pattern */
+.connecting-line {
+  position: relative;
+}
+
+.connecting-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(59, 130, 246, 0.2), transparent);
+}
+

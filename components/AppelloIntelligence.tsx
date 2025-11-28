@@ -457,7 +457,7 @@ export default function AppelloIntelligence() {
   const tagColorClasses = tagColors[currentCard.tagColor];
 
   return (
-    <Section background="gray">
+    <Section background="gradient" pattern decorative>
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Content */}

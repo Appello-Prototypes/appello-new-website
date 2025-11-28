@@ -121,7 +121,7 @@ const features: Feature[] = [
 
 export default function FeaturesGrid() {
   return (
-    <Section id="features" background="gray">
+    <Section id="features" background="gray" pattern decorative>
       <div className="space-y-16">
         <div className="text-center max-w-3xl mx-auto space-y-6">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900">

@@ -18,7 +18,13 @@ export default function MetricsSection({ caseStudies }: MetricsSectionProps) {
   const duplicatedCaseStudies = [...featuredCaseStudies, ...featuredCaseStudies];
 
   return (
-    <section className="bg-white py-16 md:py-24 overflow-hidden">
+    <section className="bg-gradient-to-b from-white via-blue-50/10 to-white py-16 md:py-24 overflow-hidden relative">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-100/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-blue-50/15 rounded-full blur-3xl"></div>
+      </div>
+      <div className="relative z-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -60,6 +66,7 @@ export default function MetricsSection({ caseStudies }: MetricsSectionProps) {
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"></div>
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
         </div>
+      </div>
       </div>
     </section>
   );

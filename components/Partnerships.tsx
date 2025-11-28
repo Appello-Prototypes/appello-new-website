@@ -54,7 +54,7 @@ function AssociationLogo({ association, index }: { association: typeof tradeAsso
           <img
             src={association.logo}
             alt={`${association.name} logo`}
-            className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300 group-hover:scale-110"
+            className="max-w-full max-h-full object-contain transition-all duration-300 group-hover:scale-110"
             loading="lazy"
             onError={() => setHasError(true)}
           />

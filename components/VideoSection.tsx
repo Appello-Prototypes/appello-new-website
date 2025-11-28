@@ -2,7 +2,7 @@ import Section from "./Section";
 
 export default function VideoSection() {
   return (
-    <Section id="overview" background="white">
+    <Section id="overview" background="white" pattern>
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header Section */}
         <div className="text-center space-y-4">
@@ -10,7 +10,7 @@ export default function VideoSection() {
             Built for Trade Contractors That Employ the People Who Do The Work
           </div>
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-900">
-            Appello Construction Workforce Management Software Built For ICI Subcontractors
+            Workforce Management Software Built For ICI Subcontractors
           </h2>
         </div>
         

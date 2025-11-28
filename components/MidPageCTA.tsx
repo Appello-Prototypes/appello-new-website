@@ -3,7 +3,7 @@ import Button from "./Button";
 
 export default function MidPageCTA() {
   return (
-    <Section background="gray">
+    <Section background="gradient" pattern decorative>
       <div className="max-w-5xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8 md:p-12 lg:p-16">
           <div className="text-center space-y-8">

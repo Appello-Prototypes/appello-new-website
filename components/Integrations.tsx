@@ -356,7 +356,7 @@ const integrations = [
 
 export default function Integrations() {
   return (
-    <Section background="gray">
+    <Section background="gray" pattern decorative>
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header Section */}
         <div className="text-center space-y-4">

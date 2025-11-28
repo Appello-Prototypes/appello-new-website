@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function ValueProp() {
   return (
-    <Section>
+    <Section background="gradient" pattern decorative>
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <div className="space-y-8">
           <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 text-primary text-sm font-medium">

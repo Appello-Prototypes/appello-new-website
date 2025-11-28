@@ -123,7 +123,7 @@ const businessFunctions = [
 
 export default function BusinessFunctions() {
   return (
-    <Section background="white">
+    <Section background="white" pattern>
       <div className="max-w-7xl mx-auto space-y-16">
         {/* Header Section */}
         <div className="text-center space-y-6 max-w-3xl mx-auto">
