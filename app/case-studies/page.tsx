@@ -1,9 +1,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Link from "next/link";
 import { getAllCaseStudies } from "@/lib/case-studies";
 import { Metadata } from "next";
-import Card from "@/components/Card";
+import CaseStudyCard from "@/components/CaseStudyCard";
 import Button from "@/components/Button";
 
 export const metadata: Metadata = {
@@ -45,61 +44,11 @@ export default function CaseStudiesPage() {
           ) : (
             <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
               {caseStudies.map((caseStudy) => (
-                <Link 
+                <CaseStudyCard 
                   key={caseStudy.slug} 
-                  href={`/case-studies/${caseStudy.slug}`}
-                  className="group"
-                >
-                  <Card className="h-full hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-200 hover:border-primary/20">
-                    <div className="space-y-5">
-                      <div className="flex items-center justify-between">
-                        <span className="px-3 py-1 bg-primary/10 text-primary font-semibold rounded-full text-xs">
-                          {caseStudy.industry}
-                        </span>
-                        <span className="text-sm text-gray-500">
-                          {new Date(caseStudy.date).toLocaleDateString("en-US", {
-                            year: "numeric",
-                            month: "short",
-                          })}
-                        </span>
-                      </div>
-                      
-                      <h2 className="text-2xl font-bold text-gray-900 group-hover:text-primary transition-colors">
-                        {caseStudy.title}
-                      </h2>
-                      
-                      <p className="text-lg font-semibold text-gray-700">
-                        {caseStudy.company}
-                      </p>
-                      
-                      <p className="text-gray-600 line-clamp-3 leading-relaxed">
-                        {caseStudy.excerpt}
-                      </p>
-                      
-                      {caseStudy.results.length > 0 && (
-                        <div className="pt-5 border-t border-gray-200">
-                          <div className="grid grid-cols-2 gap-4">
-                            {caseStudy.results.slice(0, 2).map((result, index) => (
-                              <div key={index} className="p-3 bg-gray-50 rounded-lg">
-                                <div className="text-2xl md:text-3xl font-bold bg-gradient-to-br from-primary to-primary-dark bg-clip-text text-transparent">
-                                  {result.value}
-                                </div>
-                                <div className="text-sm text-gray-600 font-medium mt-1">
-                                  {result.metric}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                      
-                      <div className="pt-4 flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all">
-                        <span>Read full case study</span>
-                        <span className="group-hover:translate-x-1 transition-transform">→</span>
-                      </div>
-                    </div>
-                  </Card>
-                </Link>
+                  caseStudy={caseStudy}
+                  variant="light"
+                />
               ))}
             </div>
           )}

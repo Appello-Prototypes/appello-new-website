@@ -18,7 +18,7 @@ export default function VideoSection() {
         <div className="aspect-video rounded-lg overflow-hidden shadow-xl border border-gray-200">
           <iframe
             className="w-full h-full"
-            src="https://www.youtube.com/embed/oU7V8m3v9F4"
+            src="https://www.youtube.com/embed/-Jg6YvK71ug"
             title="Appello: Boost Your Field Service Management & Productivity"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

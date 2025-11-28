@@ -88,6 +88,28 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
               <p className="text-xl text-gray-600 leading-relaxed">{caseStudy.excerpt}</p>
             </header>
 
+            {caseStudy.video && (() => {
+              const getVideoId = (url: string): string => {
+                const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/);
+                return match ? match[1] : '';
+              };
+              const videoId = getVideoId(caseStudy.video);
+              
+              return (
+                <div className="mb-12">
+                  <div className="aspect-video rounded-lg overflow-hidden shadow-xl border border-gray-200">
+                    <iframe
+                      className="w-full h-full"
+                      src={`https://www.youtube.com/embed/${videoId}`}
+                      title={`${caseStudy.company} Case Study Video`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
+              );
+            })()}
+
             {caseStudy.results.length > 0 && (
               <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-8 md:p-10 mb-12 border border-primary/20 shadow-sm">
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">

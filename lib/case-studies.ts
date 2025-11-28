@@ -17,6 +17,8 @@ export interface CaseStudy {
   }[];
   content: string;
   featured?: boolean;
+  video?: string;
+  location?: string;
 }
 
 export function getAllCaseStudies(): CaseStudy[] {
@@ -43,6 +45,8 @@ export function getAllCaseStudies(): CaseStudy[] {
         results: data.results || [],
         content,
         featured: data.featured || false,
+        video: data.video || "",
+        location: data.location || "",
       };
     });
 

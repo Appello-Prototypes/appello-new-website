@@ -1,56 +1,64 @@
-import Section from "./Section";
+"use client";
 
-const metrics = [
-  { 
-    value: "15-20 hrs", 
-    label: "Reclaimed weekly from administrative chaos"
-  },
-  { 
-    value: "1-2 weeks", 
-    label: "Faster cash flow with accelerated billing"
-  },
-  { 
-    value: "100%", 
-    label: "Of billable change orders captured in real-time"
-  },
-  { 
-    value: "$25K-50K", 
-    label: "Annual savings in hidden labor costs eliminated"
-  },
-];
+import { CaseStudy } from "@/lib/case-studies";
+import CaseStudyCard from "./CaseStudyCard";
 
-export default function MetricsSection() {
+interface MetricsSectionProps {
+  caseStudies: CaseStudy[];
+}
+
+export default function MetricsSection({ caseStudies }: MetricsSectionProps) {
+  const featuredCaseStudies = caseStudies.filter(cs => cs.featured);
+
+  if (featuredCaseStudies.length === 0) {
+    return null;
+  }
+
+  // Duplicate cards for seamless loop
+  const duplicatedCaseStudies = [...featuredCaseStudies, ...featuredCaseStudies];
+
   return (
-    <section className="bg-gray-900 text-white py-16 md:py-24">
+    <section className="bg-white py-16 md:py-24 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto space-y-12">
-          <div className="text-center space-y-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-white">
-              Built By Contractors, For Contractors
-            </h2>
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="inline-block px-4 py-1.5 bg-primary/10 rounded-full mb-4">
+            <span className="text-primary text-xs font-semibold uppercase tracking-wider">Customer Success Stories</span>
           </div>
-          
-          {/* Video Thumbnail Placeholder */}
-          <div className="aspect-video rounded-lg overflow-hidden bg-gray-800 border border-gray-700 flex items-center justify-center">
-            <div className="text-center text-gray-400">
-              <p className="text-lg mb-2">Video Thumbnail</p>
-              <p className="text-sm">(built-by-contractors-video.webp placeholder)</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+            Built By Contractors, For Contractors
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            See how contractors are transforming their operations with Appello
+          </p>
+        </div>
+        
+        {/* Scrolling Cards Container */}
+        <div className="relative">
+          <div className="overflow-hidden">
+            <div 
+              className="flex gap-6"
+              style={{
+                animation: `scrollCaseStudies ${featuredCaseStudies.length * 20}s linear infinite`,
+              }}
+            >
+              {duplicatedCaseStudies.map((caseStudy, index) => (
+                <div 
+                  key={`${caseStudy.slug}-${index}`}
+                  className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[480px]"
+                >
+                  <CaseStudyCard 
+                    caseStudy={caseStudy} 
+                    variant="light"
+                  />
+                </div>
+              ))}
             </div>
           </div>
           
-          {/* Metrics Below Video */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {metrics.map((metric, index) => (
-              <div key={index} className="text-center space-y-2">
-                <div className="text-3xl md:text-4xl font-bold text-white">
-                  {metric.value}
-                </div>
-                <div className="text-sm md:text-base text-gray-300">
-                  {metric.label}
-                </div>
-              </div>
-            ))}
-          </div>
+          {/* Gradient overlays for fade effect */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
         </div>
       </div>
     </section>

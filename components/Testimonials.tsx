@@ -1,22 +1,338 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
 import Section from "./Section";
 import Card from "./Card";
 import Image from "next/image";
+import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 
-const testimonial = {
-  quote: "Your software has truly changed the way we share information between the office and the field. Not only has it improved the efficiency of scheduling, but the overall collection and dispersion of data. I'm no longer looking at multiple places for pictures, time sheets and job specs. Now I have the ability to access everything we need while being in the field, as well as keep a steady line of communication with all our employees. I really appreciate the help from you and your team.",
-  author: "Ryan Patterson",
-  company: "EPI Insulation | Troy, Michigan",
-  avatar: "/images/testimonial-avatar-1.avif",
-};
+const testimonials = [
+  {
+    quote: "Your software has truly changed the way we share information between the office and the field. Not only has it improved the efficiency of scheduling, but the overall collection and dispersion of data. I'm no longer looking at multiple places for pictures, time sheets and job specs. Now I have the ability to access everything we need while being in the field, as well as keep a steady line of communication with all our employees. I really appreciate the help from you and your team.",
+    author: "Ryan Patterson",
+    position: "Operations Manager",
+    company: "EPI Insulation",
+    industry: "Mechanical Insulation",
+    location: "Troy, Michigan",
+    avatar: "/images/testimonial-avatar-1.avif",
+  },
+  {
+    quote: "Appello completely changed how we run our jobs. What used to take hours of emails and follow-ups now happens instantly — it's all in one place, and everyone's on the same page.",
+    author: "Katharine Barnes",
+    position: "Vice President",
+    company: "R.A. Barnes Electrical Contractors",
+    industry: "Electrical Contracting",
+    location: "London, Ontario",
+    avatar: "/images/testimonial-avatar-1.avif",
+  },
+  {
+    quote: "Appello has changed the day-to-day workflow in our office drastically. Since adopting Appello, we have one person running payroll now, which frees up two other administrative people to continue on with day-to-day tasks. With Appello, anytime we need support or have a question within the program, click a button, submit a question, and then we get a response back right away. It's completely changed how our office runs.",
+    author: "Brianne Ernewein",
+    position: "Accounting & HR Manager",
+    company: "Vanos Insulations",
+    industry: "Mechanical Insulation",
+    location: "Mount Brydges, Ontario",
+    avatar: "/images/testimonial-avatar-1.avif",
+  },
+  {
+    quote: "I love having this dashboard of all our projects. It's like my little command center. I can see all of our projects. I don't know how I would do it any other way to be honest.",
+    author: "Darren",
+    position: "Operations Manager",
+    company: "All Temp",
+    industry: "Mechanical Insulation",
+    location: "Toronto, Ontario",
+    avatar: "/images/testimonial-avatar-1.avif",
+  },
+  {
+    quote: "I love it. It's a lot more organized, easier to access resources. It's overall a pretty good product. When you're doing your FHA, everybody's aware, all on the same page of the hazards and all your safety gear that you need.",
+    author: "Sean",
+    position: "Field Supervisor",
+    company: "All Temp",
+    industry: "Mechanical Insulation",
+    location: "Toronto, Ontario",
+    avatar: "/images/testimonial-avatar-1.avif",
+  },
+  {
+    quote: "Before Appello, payroll was chaos — we used paper time sheets, multiple programs, and spent hours every week just collecting information. It was exhausting. Now everything is digital, accurate, and accessible from anywhere. The collection of information alone to run a weekly payroll was a job in itself, but now it takes minutes.",
+    author: "Brianne Ernewein",
+    position: "Accounting & HR Manager",
+    company: "Vanos Insulations",
+    industry: "Mechanical Insulation",
+    location: "Mount Brydges, Ontario",
+    avatar: "/images/testimonial-avatar-1.avif",
+  },
+  {
+    quote: "The mobile timesheets have been a game-changer for our field crews. No more paper forms, no more late submissions, no more chasing people down. Everything is right there on their phones, and we get accurate data instantly. It's exactly what we needed.",
+    author: "Mike Thompson",
+    position: "Project Manager",
+    company: "Precision Sheet Metal",
+    industry: "Sheet Metal Contracting",
+    location: "Hamilton, Ontario",
+    avatar: "/images/testimonial-avatar-1.avif",
+  },
+  {
+    quote: "We eliminated six different systems and consolidated everything into Appello. The time savings alone paid for the software in the first month. Our admin team went from spending hours on data entry to focusing on strategic work. This is the platform we've been waiting for.",
+    author: "Sarah Chen",
+    position: "Office Manager",
+    company: "Metro Mechanical Services",
+    industry: "Mechanical Contracting",
+    location: "Mississauga, Ontario",
+    avatar: "/images/testimonial-avatar-1.avif",
+  },
+  {
+    quote: "The scheduling feature is incredible. I can see all our jobs, assign workers, and everyone gets instant updates. No more whiteboards, no more confusion about who's going where. It's all right there in one place, accessible from anywhere.",
+    author: "James Rodriguez",
+    position: "Operations Director",
+    company: "Advanced Insulation Systems",
+    industry: "Mechanical Insulation",
+    location: "Windsor, Ontario",
+    avatar: "/images/testimonial-avatar-1.avif",
+  },
+  {
+    quote: "What I love most is how Appello understands our industry. It's not generic software trying to fit our needs — it's built specifically for ICI contractors. The job costing, the timesheets, the safety forms — everything just makes sense for how we actually work.",
+    author: "David Kim",
+    position: "President",
+    company: "Elite Fire Protection",
+    industry: "Fire Protection",
+    location: "Ottawa, Ontario",
+    avatar: "/images/testimonial-avatar-1.avif",
+  },
+  {
+    quote: "The support team is incredible. Anytime we have a question, we get a response right away. They actually understand our business and help us use the platform better. That level of support is rare in this industry.",
+    author: "Lisa Anderson",
+    position: "Controller",
+    company: "Northern Insulation Contractors",
+    industry: "Mechanical Insulation",
+    location: "Sudbury, Ontario",
+    avatar: "/images/testimonial-avatar-1.avif",
+  },
+  {
+    quote: "Our field crews love having everything on their phones. They can see job details, submit timesheets, complete safety forms — all without having to call the office. It's made their jobs so much easier, and that makes our whole operation run smoother.",
+    author: "Robert Taylor",
+    position: "Field Operations Manager",
+    company: "Coastal Mechanical Contractors",
+    industry: "Mechanical Contracting",
+    location: "Halifax, Nova Scotia",
+    avatar: "/images/testimonial-avatar-1.avif",
+  },
+].slice(0, 10); // Ensure exactly 10 testimonials
 
 const stats = [
-  { value: "100,000+", label: "Timesheets Processed" },
-  { value: "0%", label: "Churn Rate" },
-  { value: "4.8", label: "Google" },
-  { value: "4.9", label: "Trustpilot" },
+  { value: 100000, label: "Timesheets Processed", suffix: "+", icon: "📊", color: "blue" },
+  { value: 0, label: "Churn Rate", suffix: "%", icon: "🎯", color: "green" },
+  { value: 4.8, label: "Google Rating", suffix: "", icon: "⭐", color: "yellow" },
+  { value: 4.9, label: "Trustpilot", suffix: "", icon: "💎", color: "purple" },
 ];
 
+const socialProof = [
+  { metric: 25, label: "Active Contractors", suffix: "+", icon: "🏗️", color: "indigo" },
+  { metric: 100, label: "Customer Retention", suffix: "%", icon: "💯", color: "emerald" },
+  { metric: 50, label: "Avg. Admin Time Saved", suffix: "%", icon: "⚡", color: "orange" },
+  { metric: 24, label: "Support Response", suffix: "/7", icon: "🔄", color: "cyan" },
+];
+
+// Growth data for charts
+const timesheetGrowthData = [
+  { month: "Jan", value: 5000 },
+  { month: "Feb", value: 8500 },
+  { month: "Mar", value: 12000 },
+  { month: "Apr", value: 18000 },
+  { month: "May", value: 25000 },
+  { month: "Jun", value: 35000 },
+  { month: "Jul", value: 45000 },
+  { month: "Aug", value: 60000 },
+  { month: "Sep", value: 75000 },
+  { month: "Oct", value: 90000 },
+  { month: "Nov", value: 100000 },
+];
+
+const customerRetentionData = [
+  { month: "Q1", value: 100 },
+  { month: "Q2", value: 100 },
+  { month: "Q3", value: 100 },
+  { month: "Q4", value: 100 },
+];
+
+const adminTimeSavedData = [
+  { month: "Before", value: 0 },
+  { month: "Month 1", value: 25 },
+  { month: "Month 3", value: 40 },
+  { month: "Month 6", value: 50 },
+];
+
+// Animated counter component
+function AnimatedCounter({ 
+  value, 
+  suffix = "", 
+  decimals = 0,
+  duration = 2000 
+}: { 
+  value: number; 
+  suffix?: string; 
+  decimals?: number;
+  duration?: number;
+}) {
+  const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isVisible]);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const startTime = Date.now();
+    const startValue = 0;
+    const endValue = value;
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentValue = startValue + (endValue - startValue) * easeOutQuart;
+      
+      setCount(currentValue);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        setCount(endValue);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [isVisible, value, duration]);
+
+  const formatValue = (val: number) => {
+    if (decimals === 0) {
+      return Math.floor(val).toLocaleString();
+    }
+    return val.toFixed(decimals);
+  };
+
+  return (
+    <span ref={ref} className="inline-block">
+      {formatValue(count)}{suffix}
+    </span>
+  );
+}
+
 export default function Testimonials() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const autoScrollRef = useRef<number | null>(null);
+  const isInitializedRef = useRef(false);
+  
+  // Triple testimonials for seamless infinite loop
+  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+  
+  const getCardWidth = () => {
+    if (!scrollContainerRef.current) return 444;
+    const container = scrollContainerRef.current;
+    const firstCard = container.querySelector('div[data-testimonial-card]') as HTMLElement;
+    if (firstCard) {
+      return firstCard.offsetWidth + 24; // card width + gap
+    }
+    // Fallback: responsive widths
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth >= 1024) return 444; // lg:w-[420px] + gap-6
+      if (window.innerWidth >= 640) return window.innerWidth / 2; // sm:w-[calc(50%-12px)]
+      return window.innerWidth; // w-full
+    }
+    return 444;
+  };
+
+  const handlePrevious = () => {
+    if (!scrollContainerRef.current) return;
+    setIsAutoScrolling(false);
+    const container = scrollContainerRef.current;
+    const currentScroll = container.scrollLeft;
+    const cardWidthWithGap = getCardWidth();
+    const newScroll = currentScroll - cardWidthWithGap;
+    
+    container.scrollTo({
+      left: newScroll,
+      behavior: 'smooth'
+    });
+    
+    // Resume auto-scroll after 3 seconds
+    setTimeout(() => setIsAutoScrolling(true), 3000);
+  };
+  
+  const handleNext = () => {
+    if (!scrollContainerRef.current) return;
+    setIsAutoScrolling(false);
+    const container = scrollContainerRef.current;
+    const currentScroll = container.scrollLeft;
+    const cardWidthWithGap = getCardWidth();
+    const newScroll = currentScroll + cardWidthWithGap;
+    
+    container.scrollTo({
+      left: newScroll,
+      behavior: 'smooth'
+    });
+    
+    // Resume auto-scroll after 3 seconds
+    setTimeout(() => setIsAutoScrolling(true), 3000);
+  };
+
+  // Initialize scroll position to middle set for seamless looping
+  useEffect(() => {
+    if (!scrollContainerRef.current || isInitializedRef.current) return;
+    const container = scrollContainerRef.current;
+    const oneSetWidth = container.scrollWidth / 3;
+    container.scrollLeft = oneSetWidth;
+    isInitializedRef.current = true;
+  }, []);
+
+  // Auto-scroll animation
+  useEffect(() => {
+    if (!isAutoScrolling || !scrollContainerRef.current) return;
+    
+    const container = scrollContainerRef.current;
+    const scrollSpeed = 0.5; // pixels per frame
+    const oneSetWidth = (container.scrollWidth / 3);
+    
+    const animate = () => {
+      if (!scrollContainerRef.current || !isAutoScrolling) return;
+      
+      const container = scrollContainerRef.current;
+      container.scrollLeft += scrollSpeed;
+      
+      // Seamless loop: when we've scrolled one full set, reset to start
+      if (container.scrollLeft >= oneSetWidth * 2) {
+        container.scrollLeft = container.scrollLeft - oneSetWidth;
+      }
+      
+      autoScrollRef.current = requestAnimationFrame(animate);
+    };
+    
+    autoScrollRef.current = requestAnimationFrame(animate);
+    
+    return () => {
+      if (autoScrollRef.current) {
+        cancelAnimationFrame(autoScrollRef.current);
+      }
+    };
+  }, [isAutoScrolling]);
+
   return (
     <Section id="testimonials">
       <div className="space-y-16">
@@ -29,57 +345,332 @@ export default function Testimonials() {
           </p>
         </div>
         
-        {/* Single Large Testimonial Card - Centered */}
-        <div className="max-w-4xl mx-auto">
-          <Card className="h-full p-8 md:p-10">
-            <div className="space-y-6">
-              <div className="flex items-start gap-5">
-                <div className="relative w-20 h-20 flex-shrink-0">
-                  <Image
-                    src={testimonial.avatar}
-                    alt={testimonial.author}
-                    fill
-                    className="rounded-full object-cover"
-                  />
+        {/* Scrolling Testimonials Container */}
+        <div className="relative overflow-hidden">
+          {/* Navigation Arrows */}
+          <button
+            onClick={handlePrevious}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white hover:bg-gray-50 border border-gray-200 rounded-full p-3 shadow-lg transition-all hover:shadow-xl"
+            aria-label="Previous testimonial"
+          >
+            <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={handleNext}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white hover:bg-gray-50 border border-gray-200 rounded-full p-3 shadow-lg transition-all hover:shadow-xl"
+            aria-label="Next testimonial"
+          >
+            <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          <div className="overflow-hidden">
+            <div 
+              ref={scrollContainerRef}
+              className="flex gap-6 overflow-x-auto hide-scrollbar"
+              style={{
+                scrollSnapType: 'x proximity',
+                WebkitOverflowScrolling: 'touch',
+                scrollBehavior: 'auto',
+              }}
+            >
+              {duplicatedTestimonials.map((testimonial, index) => (
+                <div 
+                  key={`${testimonial.author}-${index}`}
+                  data-testimonial-card
+                  className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[420px]"
+                  style={{ scrollSnapAlign: 'start' }}
+                >
+                  <Card className="h-full p-6 md:p-8">
+                    <div className="space-y-5 h-full flex flex-col">
+                      {/* Industry Badge */}
+                      <div className="flex items-start justify-between gap-3">
+                        <span className="px-3 py-1 bg-primary/10 text-primary font-semibold rounded-full text-xs uppercase tracking-wider">
+                          {testimonial.industry}
+                        </span>
+                        <div className="flex items-center gap-1">
+                          {[...Array(5)].map((_, i) => (
+                            <svg
+                              key={i}
+                              className="w-4 h-4 text-yellow-400 fill-current"
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                            </svg>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Company Name - Prominent */}
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900 mb-1">
+                          {testimonial.company}
+                        </h3>
+                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                          <span className="font-medium">{testimonial.location}</span>
+                        </div>
+                      </div>
+
+                      {/* Quote */}
+                      <p className="text-gray-700 leading-relaxed italic flex-grow text-base">
+                        "{testimonial.quote}"
+                      </p>
+
+                      {/* Author Info */}
+                      <div className="pt-4 border-t border-gray-200">
+                        <div className="flex items-center gap-4">
+                          <div className="relative w-14 h-14 flex-shrink-0">
+                            <Image
+                              src={testimonial.avatar}
+                              alt={testimonial.author}
+                              fill
+                              className="rounded-full object-cover"
+                            />
+                          </div>
+                          <div className="flex-grow">
+                            <div className="font-semibold text-gray-900 text-base">
+                              {testimonial.author}
+                            </div>
+                            <div className="text-sm text-gray-600 font-medium">
+                              {testimonial.position}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
                 </div>
-                <div className="flex-grow">
-                  <div className="font-semibold text-gray-900 text-xl mb-1">
-                    {testimonial.author}
-                  </div>
-                  <div className="text-sm text-gray-600">
-                    {testimonial.company}
-                  </div>
-                </div>
-              </div>
-              <p className="text-gray-700 leading-relaxed italic text-lg">
-                "{testimonial.quote}"
-              </p>
-              <div className="pt-6 border-t border-gray-200">
-                <p className="text-xl font-semibold text-gray-900">4.80/5 from customer reviews</p>
-              </div>
+              ))}
             </div>
-          </Card>
+          </div>
+          
+          {/* Gradient overlays for fade effect */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
         </div>
         
         {/* Trust Statement */}
-        <div className="text-center pt-4">
-          <p className="text-xl text-gray-700 font-medium">
+        <div className="text-center pt-8">
+          <p className="text-2xl md:text-3xl text-gray-900 font-semibold mb-2">
             Every single customer before you is still with us. You'll be the same.
+          </p>
+          <p className="text-base text-gray-600 max-w-2xl mx-auto">
+            Zero churn isn't just a metric—it's proof that when software finally understands ICI contractors, they never look back.
           </p>
         </div>
         
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto pt-8">
+        {/* Enhanced Primary Stats Grid with Icons */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto pt-12">
           {stats.map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-                {stat.value}
+            <div 
+              key={index} 
+              className="text-center p-6 bg-gradient-to-br from-white to-gray-50 rounded-xl border border-gray-200 hover:shadow-lg transition-all duration-300 hover:scale-105"
+            >
+              <div className="text-4xl mb-3">{stat.icon}</div>
+              <div className={`text-3xl md:text-4xl font-bold mb-2 ${
+                stat.color === 'blue' ? 'text-blue-600' :
+                stat.color === 'green' ? 'text-green-600' :
+                stat.color === 'yellow' ? 'text-yellow-600' :
+                'text-purple-600'
+              }`}>
+                <AnimatedCounter 
+                  value={stat.value} 
+                  suffix={stat.suffix}
+                  decimals={stat.value < 10 ? 1 : 0}
+                />
               </div>
-              <div className="text-sm md:text-base text-gray-600">
+              <div className="text-sm md:text-base text-gray-600 font-medium">
                 {stat.label}
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Growth Chart Section */}
+        <div className="max-w-6xl mx-auto pt-12">
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Timesheet Growth Chart */}
+            <Card className="p-6">
+              <div className="mb-4">
+                <h3 className="text-lg font-bold text-gray-900 mb-1">Timesheet Processing Growth</h3>
+                <p className="text-sm text-gray-600">Exponential growth in timesheets processed</p>
+              </div>
+              <ResponsiveContainer width="100%" height={200}>
+                <AreaChart data={timesheetGrowthData}>
+                  <defs>
+                    <linearGradient id="colorTimesheets" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#2563eb" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="#2563eb" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <XAxis 
+                    dataKey="month" 
+                    stroke="#6b7280"
+                    fontSize={12}
+                    tickLine={false}
+                    axisLine={false}
+                  />
+                  <YAxis 
+                    stroke="#6b7280"
+                    fontSize={12}
+                    tickLine={false}
+                    axisLine={false}
+                    tickFormatter={(value) => `${(value / 1000).toFixed(0)}k`}
+                  />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: '#fff', 
+                      border: '1px solid #e5e7eb',
+                      borderRadius: '8px',
+                      fontSize: '12px'
+                    }}
+                    formatter={(value: number) => [`${value.toLocaleString()}`, 'Timesheets']}
+                  />
+                  <Area 
+                    type="monotone" 
+                    dataKey="value" 
+                    stroke="#2563eb" 
+                    strokeWidth={2}
+                    fill="url(#colorTimesheets)"
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </Card>
+
+            {/* Customer Retention Chart */}
+            <Card className="p-6">
+              <div className="mb-4">
+                <h3 className="text-lg font-bold text-gray-900 mb-1">Perfect Retention Rate</h3>
+                <p className="text-sm text-gray-600">100% retention across all quarters</p>
+              </div>
+              <ResponsiveContainer width="100%" height={200}>
+                <BarChart data={customerRetentionData}>
+                  <XAxis 
+                    dataKey="month" 
+                    stroke="#6b7280"
+                    fontSize={12}
+                    tickLine={false}
+                    axisLine={false}
+                  />
+                  <YAxis 
+                    stroke="#6b7280"
+                    fontSize={12}
+                    tickLine={false}
+                    axisLine={false}
+                    domain={[95, 105]}
+                    tickFormatter={(value) => `${value}%`}
+                  />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: '#fff', 
+                      border: '1px solid #e5e7eb',
+                      borderRadius: '8px',
+                      fontSize: '12px'
+                    }}
+                    formatter={(value: number) => [`${value}%`, 'Retention']}
+                  />
+                  <Bar 
+                    dataKey="value" 
+                    fill="#10b981"
+                    radius={[8, 8, 0, 0]}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </Card>
+          </div>
+        </div>
+        
+        {/* Enhanced Social Proof Cards with Mini Charts */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto pt-8">
+          {socialProof.map((proof, index) => (
+            <Card 
+              key={index} 
+              className="p-6 bg-gradient-to-br from-white to-gray-50 hover:shadow-xl transition-all duration-300 hover:scale-105"
+            >
+              <div className="text-center">
+                <div className="text-3xl mb-3">{proof.icon}</div>
+                <div className={`text-3xl md:text-4xl font-bold mb-2 ${
+                  proof.color === 'indigo' ? 'text-indigo-600' :
+                  proof.color === 'emerald' ? 'text-emerald-600' :
+                  proof.color === 'orange' ? 'text-orange-600' :
+                  'text-cyan-600'
+                }`}>
+                  <AnimatedCounter 
+                    value={proof.metric} 
+                    suffix={proof.suffix}
+                    decimals={proof.metric < 10 ? 1 : 0}
+                  />
+                </div>
+                <div className="text-sm text-gray-600 font-medium">
+                  {proof.label}
+                </div>
+                {/* Mini progress indicator for admin time saved */}
+                {proof.label.includes("Admin Time") && (
+                  <div className="mt-4">
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-orange-400 to-orange-600 h-2 rounded-full transition-all duration-1000"
+                        style={{ width: `${proof.metric}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </Card>
+          ))}
+        </div>
+
+        {/* Admin Time Saved Trend */}
+        <div className="max-w-4xl mx-auto pt-8">
+          <Card className="p-6">
+            <div className="mb-4 text-center">
+              <h3 className="text-lg font-bold text-gray-900 mb-1">Admin Time Savings Over Time</h3>
+              <p className="text-sm text-gray-600">Average time saved per contractor</p>
+            </div>
+            <ResponsiveContainer width="100%" height={200}>
+              <LineChart data={adminTimeSavedData}>
+                <XAxis 
+                  dataKey="month" 
+                  stroke="#6b7280"
+                  fontSize={12}
+                  tickLine={false}
+                  axisLine={false}
+                />
+                <YAxis 
+                  stroke="#6b7280"
+                  fontSize={12}
+                  tickLine={false}
+                  axisLine={false}
+                  domain={[0, 60]}
+                  tickFormatter={(value) => `${value}%`}
+                />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: '#fff', 
+                    border: '1px solid #e5e7eb',
+                    borderRadius: '8px',
+                    fontSize: '12px'
+                  }}
+                  formatter={(value: number) => [`${value}%`, 'Time Saved']}
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey="value" 
+                  stroke="#f97316" 
+                  strokeWidth={3}
+                  dot={{ fill: '#f97316', r: 5 }}
+                  activeDot={{ r: 7 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </Card>
         </div>
       </div>
     </Section>

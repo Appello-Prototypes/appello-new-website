@@ -79,12 +79,6 @@ export default function Hero() {
               </p>
             )}
             
-            {/* Social Proof - Simplified */}
-            <div className="flex items-center gap-3 pt-2">
-              <p className="text-sm text-gray-600">
-                <span className="text-primary font-semibold" aria-hidden="true">*</span> Join Contractors Across North America Using Appello
-              </p>
-            </div>
           </div>
           
           {/* Right Column - Dashboard GIF - Extends off screen with improved contrast and accessibility */}
@@ -98,42 +92,6 @@ export default function Hero() {
                 width={1200}
                 height={800}
               />
-            </div>
-          </div>
-        </div>
-        
-        {/* Feature Callout Bar - Quick capability overview */}
-        <div className="mt-12 pt-8 border-t border-gray-200" aria-label="Key features">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center" aria-hidden="true">
-                <span className="text-2xl">⏱️</span>
-              </div>
-              <span className="text-sm font-medium text-gray-900">Time Tracking</span>
-            </div>
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center" aria-hidden="true">
-                <span className="text-2xl">🔧</span>
-              </div>
-              <span className="text-sm font-medium text-gray-900">Equipment Management</span>
-            </div>
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center" aria-hidden="true">
-                <span className="text-2xl">💰</span>
-              </div>
-              <span className="text-sm font-medium text-gray-900">Job Costing</span>
-            </div>
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center" aria-hidden="true">
-                <span className="text-2xl">📋</span>
-              </div>
-              <span className="text-sm font-medium text-gray-900">Field Forms</span>
-            </div>
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center" aria-hidden="true">
-                <span className="text-2xl">📦</span>
-              </div>
-              <span className="text-sm font-medium text-gray-900">Purchase Orders</span>
             </div>
           </div>
         </div>

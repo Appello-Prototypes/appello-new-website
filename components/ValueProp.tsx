@@ -1,6 +1,7 @@
 import Section from "./Section";
 import Button from "./Button";
 import Image from "next/image";
+import LaborHoursChart from "./LaborHoursChart";
 
 export default function ValueProp() {
   return (
@@ -25,33 +26,11 @@ export default function ValueProp() {
             </Button>
           </div>
           
-          {/* Inline Testimonial Below Button */}
-          <div className="pt-8 border-t border-gray-200">
-            <p className="text-gray-700 italic text-base leading-relaxed mb-4">
-              "Appello has transformed how we manage our field operations. The real-time visibility into job costs and crew scheduling has been a game-changer."
-            </p>
-            <div className="flex items-center gap-3">
-              <Image
-                src="/images/content-avatar.webp"
-                alt="Chris Theodoru"
-                width={48}
-                height={48}
-                className="rounded-full flex-shrink-0"
-              />
-              <div>
-                <h3 className="font-semibold text-gray-900">Chris Theodoru</h3>
-                <p className="text-sm text-gray-600">VP, EPI Insulation | Troy, Michigan</p>
-              </div>
-            </div>
-          </div>
         </div>
         
         {/* Right Side - Chart/Graph */}
-        <div className="bg-gray-50 rounded-xl p-12 border border-gray-200 flex items-center justify-center min-h-[500px]">
-          <div className="text-center text-gray-400">
-            <p className="text-lg mb-2">Chart/Graph Visualization</p>
-            <p className="text-sm">(value-prop-chart.webp placeholder)</p>
-          </div>
+        <div className="bg-white rounded-xl p-8 border border-gray-200 shadow-sm">
+          <LaborHoursChart />
         </div>
       </div>
     </Section>
