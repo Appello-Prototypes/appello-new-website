@@ -222,11 +222,11 @@ export default function InteractiveMagazine({
   }, [handleZoomIn, handleZoomOut, handleReset]);
 
   // Handle click on SVG elements
-  const handleSvgClick = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
+  const handleSvgClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as SVGElement;
     
     // Check if clicked element has data-clickable attribute
-    if (target.hasAttribute("data-clickable")) {
+    if (target && target.hasAttribute && target.hasAttribute("data-clickable")) {
       const sectionId = target.getAttribute("data-section-id");
       const href = target.getAttribute("data-href");
       
@@ -241,10 +241,10 @@ export default function InteractiveMagazine({
   }, []);
 
   // Handle hover on SVG elements
-  const handleSvgMouseEnter = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
+  const handleSvgMouseEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as SVGElement;
     
-    if (target.hasAttribute("data-hover")) {
+    if (target && target.hasAttribute && target.hasAttribute("data-hover")) {
       const content = target.getAttribute("data-tooltip") || "";
       const rect = target.getBoundingClientRect();
       setTooltip({
@@ -260,10 +260,10 @@ export default function InteractiveMagazine({
     }
   }, []);
 
-  const handleSvgMouseLeave = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
+  const handleSvgMouseLeave = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as SVGElement;
     
-    if (target.hasAttribute("data-hover")) {
+    if (target && target.hasAttribute && target.hasAttribute("data-hover")) {
       setTooltip(null);
       target.style.opacity = "1";
       target.style.transform = "scale(1)";
